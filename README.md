@@ -1,14 +1,15 @@
+
 # Google Map React &middot; [![npm version](https://badge.fury.io/js/google-map-react.svg)](http://badge.fury.io/js/google-map-react) [![Build Status](https://travis-ci.org/google-map-react/google-map-react.svg?branch=master)](https://travis-ci.org/google-map-react/google-map-react) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](github.com/google-map-react/google-map-react/CONTRIBUTING.md)
 
-`google-map-react` is a component written over a small set of the [Google Maps API](https://developers.google.com/maps/). It allows you to render any React component on the Google Map. It is fully isomorphic and can render on a server. Additionally, it can render map components in the browser even if the Google Maps API is not loaded. It uses an internal, tweakable hover algorithm - every object on the map can be hovered.
+`google-map-react` é um componente desenvolvido sobre  uma pequena parte do [Google Maps API](https://developers.google.com/maps/).
+Ele permite a renderização de qualquer componente React no Mapa do Google. É totalmente isomórfico e consegue renderizar no servidor. Além disso, é capaz de renderizar componentes no navegador mesmo que o Google Maps API não esteja carregado. Internamente, ele usa um algoritmo de *hover* ajustável, permitindo interações de mouse em qualquer objeto no mapa. 
 
-It allows you to create interfaces like this [example](http://google-map-react.github.io/google-map-react/map/main) *(You can scroll the table, zoom/move the map, hover/click on markers, and click on table rows)*
+Ele te permite criar interfaces como essa do [exemplo](http://google-map-react.github.io/google-map-react/map/main) *(Você pode rolar a tabela, aplicar zoom e mover o mapa, passar o mouse sobre os marcadores e clicar neles, e clicar nas linhas da tabela)*
+## Primeiros passoss
 
-## Getting started
+No caso mais simples, você só precisa adicionar as props `lat` e `lng` em qualquer componente.
 
-In the simple case you just need to add `lat` and `lng` props to any child of `GoogleMapReact` component.
-
-[See it in action at jsbin](https://jsbin.com/ruwogapuke/1/edit?js,output)
+[Veja funcionando no jsbin](https://jsbin.com/ruwogapuke/1/edit?js,output)
 
 ```javascript
 import React, { Component } from 'react';
@@ -27,10 +28,10 @@ class SimpleMap extends Component {
 
   render() {
     return (
-      // Important! Always set the container height explicitly
+      // Importante! Sempre defina a altura do container explicitamente
       <div style={{ height: '100vh', width: '100%' }}>
         <GoogleMapReact
-          bootstrapURLKeys={{ key: /* YOUR KEY HERE */ }}
+          bootstrapURLKeys={{ key: /* SUA CHAVE DA API */ }}
           defaultCenter={this.props.center}
           defaultZoom={this.props.zoom}
         >
@@ -48,12 +49,11 @@ class SimpleMap extends Component {
 export default SimpleMap;
 ```
 
-### My map doesn't appear!
+### Meu mapa não aparece!
 
-- Make sure the container element has width and height. The map will try to fill the parent container, but if the container has no size, the map will collapse to 0 width / height. This is not a requirement for google-map-react, [its a requirement for google-maps in general](https://developers.google.com/maps/documentation/javascript/tutorial).
+- Certifique-se que o container contenha largura e altura. O mapa vai tentar preencher o componente pai, mas se o container não tiver tamanho definido, o mapa adquire largura/altura igual a  0. Isso não é um requisito do google-map-react, [mas sim um requisito do google-maps em si](https://developers.google.com/maps/documentation/javascript/tutorial).
 
-
-## Installation
+## Instalação
 
 npm:
 ```
@@ -65,39 +65,39 @@ yarn:
 yarn add google-map-react
 ```
 
-## Features
+## Recursos
 
-### Works with your Components
+### Funciona com seus próprios Componentes
 
-Instead of the default Google Maps markers, balloons and other map components, you can render your cool animated react components on the map.
+Ao invés de usar os marcadores padrão, balões e outros componentes do Google Maps, você pode renderizar seus prórpios componentes react animados no mapa.
 
-### Isomorphic Rendering
+### Renderização isomórfica
 
-It renders on the server. *(Welcome search engines)* *(you can disable javascript in browser dev tools, and reload any example page to see how it works)*
+Ele renderiza no servidor. *(Bem vindos, buscadores)* *Você pode desabilitar o javascript nas ferramentas do desenvolvedor do navegador, e recarregar qualquer página de exemplo para ver como funciona)*
 
-### Component Positions Calculated Independently of Google Maps API
+### Posição dos componentes calculadas independente do Google Maps API
 
-It renders components on the map before (and even without) the Google Maps API loaded.
+Ele renderiza os componentes no mapa antes de o Google Maps API estar carregado (até mesmo sem ele).
 
-### Google Maps API Loads on Demand
+### Google Maps API Carrega sob demanda
 
-There is no need to place a `<script src=` tag at top of page. The Google Maps API loads upon the first usage of the `GoogleMapReact` component.
+Não é necessário inserir uma tag `<script src=` no topo da página. O Google Maps API é carregado a partir da primeira utilização uso do componente `GoogleMapReact`.
 
-### Use Google Maps API 
+### Use a API do Google Maps 
 
-You can access to Google Maps `map` and `maps` objects by using `onGoogleApiLoaded`, in this case you will need to set `yesIWantToUseGoogleMapApiInternals` to `true`
+Você pode acessar os objetos `map`e `maps`do Google Maps usando `onGoogleApiLoaded`. Nesse caso, é necessário definir a propriedade `yesIWantToUseGoogleMapApiInternals` para `true`.
 
 ```javascript
 ...
 
 const handleApiLoaded = (map, maps) => {
-  // use map and maps objects
+  // usa os objetos map e maps
 };
 
 ...
 
 <GoogleMapReact
-  bootstrapURLKeys={{ key: /* YOUR KEY HERE */ }}
+  bootstrapURLKeys={{ key: /* SUA CHAVE DA API */ }}
   defaultCenter={this.props.center}
   defaultZoom={this.props.zoom}
   yesIWantToUseGoogleMapApiInternals
@@ -106,104 +106,102 @@ const handleApiLoaded = (map, maps) => {
   <AnyReactComponent
     lat={59.955413}
     lng={30.337844}
-    text="My Marker"
+    text="Meu marcador"
   />
 </GoogleMapReact>
 ```
+OBS: Lembre-se de definir `yesIWantToUseGoogleMapApiInternals` como true.
 
-PST: Remember to set `yesIWantToUseGoogleMapApiInternals` to true.
+[Exemplo](https://github.com/google-map-react/google-map-react-examples/blob/master/src/examples/Main.js#L69)
+### Algoritmo de  *Hover* Interno
 
-[Example here](https://github.com/google-map-react/google-map-react-examples/blob/master/src/examples/Main.js#L69)
+Agora é possível aplicar *hover* em todo objeto do mapa. (Contudo, você ainda pode usar seletores *hover* css se desejar) Se você der zoom no aqui nesse  [exemplo](http://google-map-react.github.io/google-map-react/map/main), ainda conseguirá passar o mouse sobre praticamente todos os marcadores do mapa.
 
-### Internal Hover Algorithm
+## Exemplos
 
-Now every object on the map can be hovered (however, you can still use css hover selectors if you want). If you try zooming out here [example](http://google-map-react.github.io/google-map-react/map/main), you will still be able to hover on almost every map marker.
+* Inserindo componentes react no mapa:
+[simples](http://google-map-react.github.io/google-map-react/map/simple/) ([código](https://github.com/google-map-react/old-examples/blob/master/web/flux/components/examples/x_simple/simple_map_page.jsx))
 
-## Examples
+* Opções do mapa personalizadas :
+[exemplo](http://google-map-react.github.io/google-map-react/map/options/) ([código](https://github.com/google-map-react/old-examples/blob/master/web/flux/components/examples/x_options/options_map_page.jsx))
 
-* Placing react components on the map:
-[simple](http://google-map-react.github.io/google-map-react/map/simple/) ([source](https://github.com/google-map-react/old-examples/blob/master/web/flux/components/examples/x_simple/simple_map_page.jsx))
+* Efeitos de *Hover*:
+[hover simples](http://google-map-react.github.io/google-map-react/map/simple_hover/) ([código](https://github.com/google-map-react/old-examples/blob/master/web/flux/components/examples/x_simple_hover/simple_hover_map_page.jsx));
+[distance hover](http://google-map-react.github.io/google-map-react/map/distance_hover/) ([código](https://github.com/google-map-react/old-examples/blob/master/web/flux/components/examples/x_distance_hover/distance_hover_map_page.jsx))
 
-* Custom map options:
-[example](http://google-map-react.github.io/google-map-react/map/options/) ([source](https://github.com/google-map-react/old-examples/blob/master/web/flux/components/examples/x_options/options_map_page.jsx))
+* Eventos do Google Maps:
+[exemplo](http://google-map-react.github.io/google-map-react/map/events/) ([código](https://github.com/google-map-react/old-examples/blob/master/web/flux/components/examples/x_events/events_map_page.jsx))
 
-* Hover effects:
-[simple hover](http://google-map-react.github.io/google-map-react/map/simple_hover/) ([source](https://github.com/google-map-react/old-examples/blob/master/web/flux/components/examples/x_simple_hover/simple_hover_map_page.jsx));
-[distance hover](http://google-map-react.github.io/google-map-react/map/distance_hover/) ([source](https://github.com/google-map-react/old-examples/blob/master/web/flux/components/examples/x_distance_hover/distance_hover_map_page.jsx))
+* Projeto de exemplo:
+[main](http://google-map-react.github.io/google-map-react/map/main/) ([código](https://github.com/google-map-react/old-examples/blob/master/web/flux/components/examples/x_main/main_map_block.jsx)); [balderdash](http://google-map-react.github.io/google-map-react/map/balderdash/) (mesmo código do principal)
 
-* GoogleMap events:
-[example](http://google-map-react.github.io/google-map-react/map/events/) ([source](https://github.com/google-map-react/old-examples/blob/master/web/flux/components/examples/x_events/events_map_page.jsx))
+* Agrupamento de marcadores (*clustering*) usando Hooks (**novo**: [código](https://github.com/leighhalliday/google-maps-clustering), [artigo](https://www.leighhalliday.com/google-maps-clustering)) [clustering-com-hooks](https://google-maps-clustering.netlify.com/)
 
-* Example project:
-[main](http://google-map-react.github.io/google-map-react/map/main/) ([source](https://github.com/google-map-react/old-examples/blob/master/web/flux/components/examples/x_main/main_map_block.jsx)); [balderdash](http://google-map-react.github.io/google-map-react/map/balderdash/) (same source as main)
-
-* Clustering example using Hooks (**new**: [source](https://github.com/leighhalliday/google-maps-clustering), [article](https://www.leighhalliday.com/google-maps-clustering)) [clustering-with-hooks](https://google-maps-clustering.netlify.com/)
-
-* Clustering example ([source](https://github.com/istarkov/google-map-clustering-example))
+* Exemplos de clustering ([código](https://github.com/istarkov/google-map-clustering-example))
 [google-map-clustering-example](http://istarkov.github.io/google-map-clustering-example/)
 
-* How to render thousands of markers (**new**: [source](https://github.com/istarkov/google-map-thousands-markers))
+* Como renderizar milhares de marcadores (**novo**: [código](https://github.com/istarkov/google-map-thousands-markers))
 [google-map-thousands-markers](https://istarkov.github.io/google-map-thousands-markers/)
 
-* Examples:
-[Examples](https://github.com/google-map-react/google-map-react-examples)
-[Old examples](https://github.com/google-map-react/old-examples)
+* Exemplos:
+[Exemplos](https://github.com/google-map-react/google-map-react-examples)
+[Exemplos antigos](https://github.com/google-map-react/old-examples)
 
-* jsbin example
-[jsbin example](https://jsbin.com/ruwogapuke/1/edit?js,output)
+* Exemplo no jsbin
+[exemplo no jsbin](https://jsbin.com/ruwogapuke/1/edit?js,output)
 
-* webpackbin examples (**new**)
-[docs with webpackbin examples](./DOC.md) (In progress)
+* Exemplos no webpackbin (**novo**)
+[documentação com os exemplos](./DOC.md) (Em construção)
 
-* local develop example (new)
+* Exemplo no desenvolvimento local (novo)
 [develop example](./develop)
 
-## Documentation
+## Documentação
 
-You can find the documentation here:
+Você encontra a documentação aqui:
 
-- [API Reference](./API.md)
+- [Referência da API](./API.md)
 
-- [NEW DOCS](./DOC.md) (In progress)
+- [Nova Documentação](./DOC.md) (Em construção)
 
-## Contribute
+## Contribua
 
-Local development is broken into two parts (ideally using two tabs).
+O desenvolvimento local é dividido em duas partes (idealmente, usando duas abas)
 
-First, run rollup to watch your `src/` module and automatically recompile it into `dist/` whenever you make changes.
+Primeiro, execute npm start para observar a pasta `src/`e recompilar automaticamente a cada mudança.
 
 ```bash
 npm start # runs rollup with watch flag
 ```
-
-The second part will be running the `example/` create-react-app that's linked to the local version of your module.
+A segunda parte executará o `example/` criado por `create-react-app` que é linkado à versão local do seu módulo.
 
 ```bash
-# (in another tab)
+# (em outra aba do console)
 cd example
 npm start # runs create-react-app dev server
 ```
 
-Now, anytime you make a change to your library in `src/` or to the example app's `example/src`, `create-react-app` will live-reload your local dev server so you can iterate on your component in real-time.
+Agora, toda vez que você alterar algo no diretório  `src/` ou na pasta  `example/src` do app de exemplo, `create-react-app` irá  recarregar automaticamente seu servidor de desenvolvimento local e você pode iterar no seu componente em tempo real.
 
-### Manual link-install
-If you get the error `Module not found: Can't resolve 'google-react-map'...` while trying to run the example app, you need to manually link your local development module, try the following steps:
-  1. In the root folder:
+### link-install manual
+Se você receber o erro`Module not found: Can't resolve 'google-react-map'...` ao executar o app de exemplo, você precisa linkar seu módulo de desenvolvimento local manualmente. Tente as opções a seguir:
+
+  1. Na pasta raiz:
   ```bash
   npm link
   ```
-  2. Go into `example/` and (after installing other dependencies) execute:
+  2. Navegue até `example/` e (após instalar outras dependências) execute:
   ```bash
   npm link google-map-react
   ```
 
-## License
+## Licença
 
 [MIT](./LICENSE.md)
 
-## Known Issues
+## Problemas conhecidos
 
-* Older browsers (http://caniuse.com/#feat=promises) will need a ES6 Promise polyfill in order to work.
+* Navegadores antigos precisarão de um polyfill pra suportar as Promises do ES6 para funcionar.
 
-## !!! We are looking for contributors
-We're actively looking for contributors, please send a message to the Owner or any of the Collaborators.
+## !!! Buscamos colaboradores
+Estamos constantemente buscando colaboradores. Por favor, envie uma mensagem ao prorietário ou qualquer outro colaborador.
