@@ -81,7 +81,7 @@ Ele renderiza os componentes no mapa antes de o Google Maps API estar carregado 
 
 ### Google Maps API Carrega sob demanda
 
-Não é necessário inserir uma tag `<script src=` no topo da página. O Google Maps API é carregado a partir da primeira utilização uso do componente `GoogleMapReact`.
+Não é necessário inserir uma tag `<script src=` no topo da página. O Google Maps API é carregado a partir da primeira utilização do componente `GoogleMapReact`.
 
 ### Use a API do Google Maps 
 
